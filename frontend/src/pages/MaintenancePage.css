@@ -1,0 +1,114 @@
+/* ── Maintenance Page ── */
+.maint-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Header ── */
+.maint-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.maint-page__header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.maint-page__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ff-radius-lg);
+  background: var(--ff-accent-dim);
+  color: var(--ff-accent);
+  font-size: 1.4rem;
+}
+
+.maint-page__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ff-text-primary);
+  line-height: 1.2;
+}
+
+.maint-page__subtitle {
+  font-size: 0.8rem;
+  color: var(--ff-text-secondary);
+  margin-top: 2px;
+}
+
+.maint-page__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--ff-accent);
+  color: #0A0A0A;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--ff-radius);
+  transition: var(--ff-transition);
+}
+
+.maint-page__add-btn:hover {
+  background: var(--ff-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--ff-accent-glow);
+}
+
+/* ── Status Filters ── */
+.maint-page__filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.maint-page__filter-btn {
+  padding: 7px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 20px;
+  color: var(--ff-text-secondary);
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  transition: var(--ff-transition);
+}
+
+.maint-page__filter-btn:hover {
+  background: var(--ff-bg-hover);
+  color: var(--ff-text-primary);
+}
+
+.maint-page__filter-btn--active {
+  background: var(--ff-accent-dim);
+  color: var(--ff-accent);
+  border-color: rgba(196, 138, 46, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .maint-page {
+    padding: 20px 16px;
+  }
+
+  .maint-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .maint-page__add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

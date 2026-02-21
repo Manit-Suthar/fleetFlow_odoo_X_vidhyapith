@@ -1,0 +1,180 @@
+/* ── Maintenance Table ── */
+.mt-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+  background: var(--ff-bg-surface);
+}
+
+.mt-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.mt-table thead th {
+  padding: 14px 18px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ff-text-secondary);
+  text-align: left;
+  border-bottom: 1px solid var(--ff-border);
+  background: var(--ff-bg-elevated);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mt-table tbody td {
+  padding: 14px 18px;
+  font-size: 0.875rem;
+  color: var(--ff-text-primary);
+  border-bottom: 1px solid var(--ff-border);
+  vertical-align: middle;
+}
+
+.mt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Staggered Row Animation ── */
+.mt-table__row {
+  animation: fadeSlideUp 350ms ease both;
+  transition: background var(--ff-transition);
+}
+
+.mt-table__row:hover {
+  background: var(--ff-bg-hover);
+}
+
+/* ── Vehicle Cell ── */
+.mt-table__vehicle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mt-table__vehicle-name {
+  font-weight: 600;
+  color: var(--ff-text-primary);
+}
+
+.mt-table__vehicle-plate {
+  font-size: 0.75rem;
+  color: var(--ff-text-muted);
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Cost ── */
+.mt-table__cost {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Performer ── */
+.mt-table__performer {
+  color: var(--ff-text-secondary);
+}
+
+/* ── Actions Menu ── */
+.mt-table__actions {
+  position: relative;
+  width: 40px;
+  text-align: center;
+}
+
+.mt-table__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ff-radius);
+  color: var(--ff-text-secondary);
+  transition: var(--ff-transition);
+  font-size: 1.1rem;
+}
+
+.mt-table__menu-btn:hover {
+  background: var(--ff-bg-hover);
+  color: var(--ff-text-primary);
+}
+
+.mt-table__dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 10;
+  min-width: 160px;
+  background: var(--ff-bg-elevated);
+  border: 1px solid var(--ff-border-light);
+  border-radius: var(--ff-radius);
+  box-shadow: var(--ff-shadow-lg);
+  padding: 4px;
+  animation: scaleIn 150ms ease;
+  transform-origin: top right;
+}
+
+.mt-table__dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 0.825rem;
+  color: var(--ff-text-primary);
+  border-radius: var(--ff-radius-sm);
+  transition: var(--ff-transition);
+}
+
+.mt-table__dropdown-item:hover {
+  background: var(--ff-accent-dim);
+  color: var(--ff-accent);
+}
+
+.mt-table__dropdown-item--disabled {
+  color: var(--ff-text-muted);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Skeleton Loading ── */
+.mt-table-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+}
+
+.mt-table-skeleton__row {
+  height: 48px;
+  background: linear-gradient(90deg, var(--ff-bg-surface) 25%, var(--ff-bg-elevated) 50%, var(--ff-bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: var(--ff-radius);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Empty State ── */
+.mt-table-empty {
+  padding: 60px 20px;
+  text-align: center;
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+}
+
+.mt-table-empty__text {
+  color: var(--ff-text-muted);
+  font-size: 0.9rem;
+}
