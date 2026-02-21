@@ -6,11 +6,21 @@
 .layout__main {
     flex: 1;
     margin-left: var(--sidebar-width);
-    transition: margin-left var(--transition-base);
+    transition: margin-left var(--duration-slow) var(--ease-out);
+}
+
+/* When sidebar is collapsed, shrink the left margin */
+.layout--collapsed .layout__main {
+    margin-left: var(--sidebar-collapsed);
+}
+
+/* Navbar also needs to shift */
+.layout--collapsed .navbar {
+    left: var(--sidebar-collapsed);
 }
 
 .layout__content {
     margin-top: var(--navbar-height);
-    padding: 28px;
+    padding: 24px;
     min-height: calc(100vh - var(--navbar-height));
 }

@@ -3,30 +3,38 @@ import {
     HiOutlineViewGrid,
     HiOutlineTruck,
     HiOutlineMap,
-    HiOutlineUsers,
-    HiOutlineCreditCard,
-    HiOutlineDocumentReport,
     HiOutlineCog,
     HiOutlineLogout,
-    HiOutlineChevronLeft,
-    HiOutlineChevronRight
+    HiOutlineMenuAlt2,
+    HiOutlineX,
+    HiOutlineClipboardList,
+    HiOutlineCurrencyDollar,
+    HiOutlineUserGroup,
+    HiOutlineChartBar,
+    HiOutlineShieldCheck
 } from 'react-icons/hi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Sidebar.css';
 
 const navItems = [
-    { path: '/dashboard', icon: HiOutlineViewGrid, label: 'Dashboard' },
-    { path: '/vehicles', icon: HiOutlineTruck, label: 'Vehicles' },
-    { path: '/trips', icon: HiOutlineMap, label: 'Trips' },
-    { path: '/drivers', icon: HiOutlineUsers, label: 'Drivers' },
-    { path: '/finance', icon: HiOutlineCreditCard, label: 'Finance' },
-    { path: '/reports', icon: HiOutlineDocumentReport, label: 'Reports' },
+    { path: '/dashboard', icon: HiOutlineViewGrid, label: 'Command Center' },
+    { path: '/vehicles', icon: HiOutlineTruck, label: 'Vehicle Registry' },
+    { path: '/trips', icon: HiOutlineMap, label: 'Trip Dispatcher' },
+    { path: '/maintenance', icon: HiOutlineClipboardList, label: 'Maintenance Logs' },
+    { path: '/expenses', icon: HiOutlineCurrencyDollar, label: 'Expense & Fuel' },
+    { path: '/drivers', icon: HiOutlineUserGroup, label: 'Driver Profiles' },
+    { path: '/analytics', icon: HiOutlineChartBar, label: 'Analytics' },
     { path: '/settings', icon: HiOutlineCog, label: 'Settings' },
 ];
 
-function Sidebar() {
-    const [collapsed, setCollapsed] = useState(false);
+function Sidebar({ collapsed, setCollapsed }) {
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const stored = localStorage.getItem('user');
+        if (stored) setUser(JSON.parse(stored));
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -34,22 +42,26 @@ function Sidebar() {
         navigate('/login');
     };
 
+    const roleLabel = (role) => (role || 'dispatcher').replace(/_/g, ' ');
+
     return (
         <aside className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''}`}>
-            <div className="sidebar__header">
-                <div className="sidebar__logo">
-                    <span className="sidebar__logo-icon">🚛</span>
-                    {!collapsed && <span className="sidebar__logo-text">FleetFlow</span>}
-                </div>
-                <button
-                    className="sidebar__toggle"
-                    onClick={() => setCollapsed(!collapsed)}
-                    aria-label="Toggle sidebar"
-                >
-                    {collapsed ? <HiOutlineChevronRight /> : <HiOutlineChevronLeft />}
-                </button>
+            {/* Toggle button — always visible */}
+            <button
+                className="sidebar__toggle"
+                onClick={() => setCollapsed(!collapsed)}
+                aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+                {collapsed ? <HiOutlineMenuAlt2 /> : <HiOutlineX />}
+            </button>
+
+            {/* Brand */}
+            <div className="sidebar__brand">
+                <HiOutlineShieldCheck className="sidebar__brand-icon" />
+                {!collapsed && <span className="sidebar__brand-text">FleetFlow</span>}
             </div>
 
+            {/* Navigation */}
             <nav className="sidebar__nav">
                 {navItems.map((item) => (
                     <NavLink
@@ -58,20 +70,37 @@ function Sidebar() {
                         className={({ isActive }) =>
                             `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
                         }
-                        title={collapsed ? item.label : undefined}
+                        title={item.label}
                     >
                         <item.icon className="sidebar__link-icon" />
-                        {!collapsed && <span className="sidebar__link-label">{item.label}</span>}
+                        {!collapsed && <span className="sidebar__link-text">{item.label}</span>}
                     </NavLink>
                 ))}
             </nav>
 
-            <div className="sidebar__footer">
-                <button className="sidebar__link sidebar__logout" onClick={handleLogout} title="Logout">
-                    <HiOutlineLogout className="sidebar__link-icon" />
-                    {!collapsed && <span className="sidebar__link-label">Logout</span>}
-                </button>
+            {/* Account card */}
+            <div className="sidebar__account">
+                <div className="sidebar__avatar">
+                    {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                </div>
+                {!collapsed && (
+                    <div className="sidebar__account-info">
+                        <span className="sidebar__account-name">{user?.name || 'User'}</span>
+                        <span className="sidebar__account-role">{roleLabel(user?.role)}</span>
+                    </div>
+                )}
+                {!collapsed && (
+                    <button className="sidebar__logout-btn" onClick={handleLogout} title="Logout">
+                        <HiOutlineLogout />
+                    </button>
+                )}
             </div>
+
+            {collapsed && (
+                <button className="sidebar__logout-collapsed" onClick={handleLogout} title="Logout">
+                    <HiOutlineLogout />
+                </button>
+            )}
         </aside>
     );
 }
