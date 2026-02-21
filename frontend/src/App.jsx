@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import DashboardLayout from './components/DashboardLayout';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+// Protected route wrapper
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  if (!token) return <Navigate to="/login" replace />;
+  return children;
 }
 
-export default App
+function App() {
+  return (
+    <Routes>
+      {/* Public */}
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* Protected — wrapped in layout */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/dashboard" element={<DashboardPage />} />
+
+        {/* Placeholder routes for teammates' pages */}
+        <Route path="/vehicles" element={<PlaceholderPage title="Vehicle Management" emoji="🚛" owner="Fenil" />} />
+        <Route path="/trips" element={<PlaceholderPage title="Trip Management" emoji="🗺️" owner="Fenil" />} />
+        <Route path="/drivers" element={<PlaceholderPage title="Driver Management" emoji="👥" owner="Vatsal" />} />
+        <Route path="/finance" element={<PlaceholderPage title="Finance & Invoicing" emoji="💰" owner="Vatsal" />} />
+        <Route path="/reports" element={<PlaceholderPage title="Reports & Analytics" emoji="📊" owner="Manasvi" />} />
+        <Route path="/settings" element={<PlaceholderPage title="Settings" emoji="⚙️" owner="Manasvi" />} />
+      </Route>
+
+      {/* Default redirect */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  );
+}
+
+// Temporary placeholder for teammate pages
+function PlaceholderPage({ title, emoji, owner }) {
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '60vh',
+      gap: '12px',
+      color: 'var(--text-secondary)',
+    }}>
+      <span style={{ fontSize: '3rem' }}>{emoji}</span>
+      <h2 style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{title}</h2>
+      <p>This page will be built by <strong>{owner}</strong></p>
+    </div>
+  );
+}
+
+export default App;
