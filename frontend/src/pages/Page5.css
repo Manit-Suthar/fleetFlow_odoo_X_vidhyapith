@@ -1,0 +1,342 @@
+.page5 {
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page5-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page5-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.page5-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.page5-btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.page5-btn-primary:hover {
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+    transform: translateY(-1px);
+}
+
+.page5-btn-secondary {
+    padding: 9px 18px;
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.page5-btn-secondary:hover {
+    background: var(--border);
+    color: var(--text-primary);
+}
+
+.page5-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+}
+
+.page5-table-container {
+    overflow-x: auto;
+}
+
+.page5-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.page5-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+}
+
+.page5-table td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.page5-table tr:hover td {
+    background: var(--primary-bg);
+}
+
+/* Modal Styling */
+.page5-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.page5-modal-content {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.page5-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page5-modal-header h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.page5-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.page5-modal-close:hover {
+    color: var(--text-primary);
+}
+
+.page5-form {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.page5-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.page5-form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.page5-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: border-color 150ms ease;
+    box-sizing: border-box;
+}
+
+.page5-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-bg);
+    outline: none;
+}
+
+.page5-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.page5-loading,
+.page5-empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-success {
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--success);
+}
+
+.badge-warning {
+    background: rgba(217, 119, 6, 0.1);
+    color: var(--warning);
+}
+
+.badge-danger {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--danger);
+}
+
+.badge-info {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--info);
+}
+
+.badge-primary {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+
+.custom-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-dropdown-button {
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.custom-dropdown-button:hover {
+    filter: brightness(0.95);
+}
+
+.custom-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 50;
+    min-width: 140px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.custom-dropdown-item {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+}
+
+.custom-dropdown-item:hover,
+.custom-dropdown-item.active {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.bg-success {
+    background-color: var(--success);
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-warning {
+    background-color: var(--warning);
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 150ms ease;
+    margin-right: 6px;
+}
+
+.edit-btn {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+}
+
+.edit-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.delete-btn {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: var(--danger);
+}
+
+.delete-btn:hover {
+    background-color: var(--danger);
+    color: white;
+}

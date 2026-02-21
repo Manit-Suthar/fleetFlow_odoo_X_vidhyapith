@@ -14,23 +14,26 @@ app.get("/", (req, res) => {
   res.json({ message: "FleetFlow API is running" });
 });
 
-// Routes — Team shared
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
+
+// Routes - Team shared
 app.use("/api/auth", require("./src/routes/authRoutes"));
 app.use("/api/dashboard", require("./src/routes/dashboardRoutes"));
 
-// Routes — Page 7 & 8 (Manasvi)
+// Routes - Page 7 & 8 (Manasvi)
 app.use("/api/drivers", require("./src/routes/drivers"));
 app.use("/api/issues", require("./src/routes/issues"));
 app.use("/api/analytics", require("./src/routes/analytics"));
 
-// Future routes (teammates will tell you what to add)
-// app.use("/api/vehicles", require("./src/routes/vehicleRoutes"));
-// app.use("/api/trips", require("./src/routes/tripRoutes"));
-// app.use("/api/invoices", require("./src/routes/invoiceRoutes"));
-// app.use("/api/expenses", require("./src/routes/expenseRoutes"));
-// app.use("/api/maintenance", require("./src/routes/maintenanceRoutes"));
-// app.use("/api/reports", require("./src/routes/reportRoutes"));
-// app.use("/api/settings", require("./src/routes/settingsRoutes"));
+// Routes - Page 3 & 4 (Fenil)
+app.use("/api/v1/vehicles", require("./src/routes/vehicles.routes"));
+app.use("/api/v1/trips", require("./src/routes/trips.routes"));
+
+// Routes - Page 5 & 6 (Vatsal)
+app.use("/api/maintenance", require("./src/routes/maintenance"));
+app.use("/api/fuel", require("./src/routes/fuel"));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,13 +1,16 @@
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import DashboardLayout from './components/DashboardLayout';
 import DriverPerformance from './pages/DriverPerformance';
 import AnalyticsReports from './pages/AnalyticsReports';
+import VehicleRegistry from './pages/fleet/VehicleRegistry';
+import TripDispatcher from './pages/fleet/TripDispatcher';
+import MaintenanceLogs from './pages/Page5';
+import FuelAndAnalytics from './pages/Page6';
 import { HiOutlineShieldExclamation } from 'react-icons/hi';
 
-// ── RBAC: Role → allowed pages ──
 const ROLE_ACCESS = {
   fleet_manager: ['/dashboard', '/vehicles', '/trips', '/maintenance', '/expenses', '/drivers', '/analytics', '/settings'],
   dispatcher: ['/dashboard', '/vehicles', '/trips', '/drivers', '/analytics'],
@@ -15,14 +18,12 @@ const ROLE_ACCESS = {
   financial_analyst: ['/dashboard', '/trips', '/maintenance', '/expenses', '/analytics'],
 };
 
-// Protected route wrapper
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
   if (!token) return <Navigate to="/login" replace />;
   return children;
 }
 
-// Role-guarded page wrapper
 function RoleGuard({ path, children }) {
   const [denied, setDenied] = useState(false);
   const navigate = useNavigate();
@@ -94,11 +95,10 @@ function App() {
           margin-top: 8px;
         }
       `}</style>
+
       <Routes>
-        {/* Public */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Protected — wrapped in layout */}
         <Route
           element={
             <ProtectedRoute>
@@ -108,75 +108,50 @@ function App() {
         >
           <Route path="/dashboard" element={<DashboardPage />} />
 
-          {/* Page 3: Vehicle Registry — Fenil */}
-          <Route path="/vehicles" element={
-            <RoleGuard path="/vehicles">
-              <PlaceholderPage title="Vehicle Registry" subtitle="Asset Management" owner="Fenil" />
-            </RoleGuard>
-          } />
+          <Route
+            path="/vehicles"
+            element={
+              <RoleGuard path="/vehicles">
+                <VehicleRegistry />
+              </RoleGuard>
+            }
+          />
 
-          {/* Page 4: Trip Dispatcher — Fenil */}
-          <Route path="/trips" element={
-            <RoleGuard path="/trips">
-              <PlaceholderPage title="Trip Dispatcher" subtitle="Trip & Route Management" owner="Fenil" />
-            </RoleGuard>
-          } />
+          <Route
+            path="/trips"
+            element={
+              <RoleGuard path="/trips">
+                <TripDispatcher />
+              </RoleGuard>
+            }
+          />
 
-          {/* Page 5: Maintenance Logs — Vatsal */}
-          <Route path="/maintenance" element={
-            <RoleGuard path="/maintenance">
-              <PlaceholderPage title="Maintenance & Service Logs" subtitle="Service Tracking" owner="Vatsal" />
-            </RoleGuard>
-          } />
-
-          {/* Page 6: Expense & Fuel — Vatsal */}
-          <Route path="/expenses" element={
-            <RoleGuard path="/expenses">
-              <PlaceholderPage title="Expense & Fuel Logging" subtitle="Completed Trip Expenses" owner="Vatsal" />
-            </RoleGuard>
-          } />
-
-          {/* Page 7: Driver Profiles — Manasvi (LIVE) */}
-          <Route path="/drivers" element={
-            <RoleGuard path="/drivers">
-              <DriverPerformance />
-            </RoleGuard>
-          } />
-
-          {/* Page 8: Analytics — Manasvi (LIVE) */}
-          <Route path="/analytics" element={
-            <RoleGuard path="/analytics">
-              <AnalyticsReports />
-            </RoleGuard>
-          } />
-
-          {/* Settings */}
-          <Route path="/settings" element={
-            <RoleGuard path="/settings">
-              <PlaceholderPage title="Settings" subtitle="System Configuration" owner="Manit" />
-            </RoleGuard>
-          } />
+          <Route path="/maintenance" element={<RoleGuard path="/maintenance"><MaintenanceLogs /></RoleGuard>} />
+          <Route path="/expenses" element={<RoleGuard path="/expenses"><FuelAndAnalytics /></RoleGuard>} />
+          <Route path="/drivers" element={<RoleGuard path="/drivers"><DriverPerformance /></RoleGuard>} />
+          <Route path="/analytics" element={<RoleGuard path="/analytics"><AnalyticsReports /></RoleGuard>} />
+          <Route path="/settings" element={<RoleGuard path="/settings"><PlaceholderPage title="Settings" subtitle="System Configuration" owner="Manit" /></RoleGuard>} />
         </Route>
 
-        {/* Default redirect */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </>
   );
 }
 
-// Placeholder for teammate pages
 function PlaceholderPage({ title, subtitle, owner }) {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '60vh',
-      gap: '6px',
-      color: 'var(--text-secondary)',
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '60vh',
+        gap: '6px',
+        color: 'var(--text-secondary)',
+      }}
+    >
       <h2 style={{ color: 'var(--text-heading)', fontWeight: 700, fontSize: '1.2rem' }}>{title}</h2>
       <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>{subtitle}</p>
       <p style={{ marginTop: '10px', fontSize: '0.78rem' }}>

@@ -1,0 +1,210 @@
+/* ── Analytics Page ── */
+.analytics-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Header ── */
+.analytics-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.analytics-page__header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.analytics-page__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ff-radius-lg);
+  background: var(--ff-accent-dim);
+  color: var(--ff-accent);
+  font-size: 1.4rem;
+}
+
+.analytics-page__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ff-text-primary);
+  line-height: 1.2;
+}
+
+.analytics-page__subtitle {
+  font-size: 0.8rem;
+  color: var(--ff-text-secondary);
+  margin-top: 2px;
+}
+
+.analytics-page__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--ff-accent);
+  color: #0A0A0A;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--ff-radius);
+  transition: var(--ff-transition);
+}
+
+.analytics-page__add-btn:hover {
+  background: var(--ff-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--ff-accent-glow);
+}
+
+/* ── Vehicle Selector ── */
+.analytics-page__selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+  padding: 14px 20px;
+}
+
+.analytics-page__selector-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ff-text-secondary);
+  white-space: nowrap;
+}
+
+.analytics-page__selector-select {
+  flex: 1;
+  max-width: 360px;
+  padding: 8px 14px;
+  background: var(--ff-bg-input);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius);
+  color: var(--ff-text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238A8A8A' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  transition: var(--ff-transition);
+}
+
+.analytics-page__selector-select:focus {
+  border-color: var(--ff-accent);
+  box-shadow: 0 0 0 2px var(--ff-accent-dim);
+}
+
+.analytics-page__selector-select option {
+  background: var(--ff-bg-elevated);
+  color: var(--ff-text-primary);
+}
+
+/* ── KPI Grid ── */
+.analytics-page__kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ── Charts Grid ── */
+.analytics-page__charts {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 20px;
+}
+
+/* ── Loading ── */
+.analytics-page__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 20px;
+  color: var(--ff-text-secondary);
+  font-size: 0.9rem;
+}
+
+.analytics-page__spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ff-border);
+  border-top-color: var(--ff-accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Empty ── */
+.analytics-page__empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--ff-text-muted);
+  font-size: 0.9rem;
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .analytics-page__kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analytics-page__charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-page {
+    padding: 20px 16px;
+  }
+
+  .analytics-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analytics-page__add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .analytics-page__kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-page__selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analytics-page__selector-select {
+    max-width: 100%;
+    width: 100%;
+  }
+}
