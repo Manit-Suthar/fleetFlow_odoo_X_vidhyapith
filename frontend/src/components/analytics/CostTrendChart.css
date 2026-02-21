@@ -1,0 +1,50 @@
+.trend-chart-card {
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+  padding: 24px;
+}
+
+.trend-chart-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ff-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+.trend-chart-card--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.trend-chart-card__empty-text {
+  color: var(--ff-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── Tooltip ── */
+.trend-tooltip {
+  background: var(--ff-bg-elevated);
+  border: 1px solid var(--ff-border-light);
+  border-radius: var(--ff-radius);
+  padding: 10px 14px;
+  box-shadow: var(--ff-shadow);
+}
+
+.trend-tooltip__label {
+  font-size: 0.75rem;
+  color: var(--ff-text-secondary);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.trend-tooltip__row {
+  font-size: 0.825rem;
+  font-weight: 600;
+  margin: 0;
+}

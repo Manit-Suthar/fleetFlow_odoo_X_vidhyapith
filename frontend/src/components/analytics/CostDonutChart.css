@@ -1,0 +1,76 @@
+.donut-chart-card {
+  background: var(--ff-bg-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius-lg);
+  padding: 24px;
+}
+
+.donut-chart-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ff-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+.donut-chart-card--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.donut-chart-card__empty-text {
+  color: var(--ff-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── Custom Tooltip ── */
+.donut-tooltip {
+  background: var(--ff-bg-elevated);
+  border: 1px solid var(--ff-border-light);
+  border-radius: var(--ff-radius);
+  padding: 10px 14px;
+  box-shadow: var(--ff-shadow);
+}
+
+.donut-tooltip__label {
+  font-size: 0.75rem;
+  color: var(--ff-text-secondary);
+  margin-bottom: 2px;
+}
+
+.donut-tooltip__value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ff-text-primary);
+}
+
+/* ── Legend ── */
+.donut-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.donut-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.donut-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.donut-legend__text {
+  font-size: 0.8rem;
+  color: var(--ff-text-secondary);
+}

@@ -7,6 +7,8 @@ import DriverPerformance from './pages/DriverPerformance';
 import AnalyticsReports from './pages/AnalyticsReports';
 import VehicleRegistry from './pages/fleet/VehicleRegistry';
 import TripDispatcher from './pages/fleet/TripDispatcher';
+import MaintenanceLogs from './pages/Page5';
+import FuelAndAnalytics from './pages/Page6';
 import { HiOutlineShieldExclamation } from 'react-icons/hi';
 
 const ROLE_ACCESS = {
@@ -124,8 +126,8 @@ function App() {
             }
           />
 
-          <Route path="/maintenance" element={<RoleGuard path="/maintenance"><PlaceholderPage title="Maintenance & Service Logs" subtitle="Service Tracking" owner="Vatsal" /></RoleGuard>} />
-          <Route path="/expenses" element={<RoleGuard path="/expenses"><PlaceholderPage title="Expense & Fuel Logging" subtitle="Completed Trip Expenses" owner="Vatsal" /></RoleGuard>} />
+          <Route path="/maintenance" element={<RoleGuard path="/maintenance"><MaintenanceLogs /></RoleGuard>} />
+          <Route path="/expenses" element={<RoleGuard path="/expenses"><FuelAndAnalytics /></RoleGuard>} />
           <Route path="/drivers" element={<RoleGuard path="/drivers"><DriverPerformance /></RoleGuard>} />
           <Route path="/analytics" element={<RoleGuard path="/analytics"><AnalyticsReports /></RoleGuard>} />
           <Route path="/settings" element={<RoleGuard path="/settings"><PlaceholderPage title="Settings" subtitle="System Configuration" owner="Manit" /></RoleGuard>} />
