@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
 /* ═══════════════════════════════════════════
    FleetFlow Design System — Professional Grade
@@ -21,6 +22,13 @@
   /* hover states */
   --bg-active: #e8eaef;
   /* active/pressed states */
+
+  /* Backgrounds — aliased for Page 7/8 compat */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #f1f5f9;
 
   /* Borders — subtle ~85% white */
   --border: #e5e7eb;
@@ -116,6 +124,45 @@
   --duration-slow: 350ms;
 }
 
+/* ─── Tailwind Theme Tokens (for Page 7 & 8 Tailwind classes) ─── */
+@theme {
+  /* Surface hierarchy */
+  --color-surface-0: #ffffff;
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+
+  /* Border hierarchy */
+  --color-edge-0: #e2e8f0;
+  --color-edge-100: #cbd5e1;
+  --color-edge-200: #94a3b8;
+
+  /* Text hierarchy */
+  --color-ink-0: #0f172a;
+  --color-ink-100: #334155;
+  --color-ink-200: #475569;
+  --color-ink-300: #64748b;
+  --color-ink-400: #94a3b8;
+
+  /* Semantic */
+  --color-positive: #059669;
+  --color-positive-muted: #d1fae5;
+  --color-caution: #d97706;
+  --color-caution-muted: #fef3c7;
+  --color-danger: #dc2626;
+  --color-danger-muted: #fee2e2;
+  --color-info: #4f46e5;
+  --color-info-muted: #e0e7ff;
+
+  /* Brand */
+  --color-brand: #4f46e5;
+  --color-brand-hover: #4338ca;
+  --color-brand-muted: #e0e7ff;
+  --color-brand-light: #c7d2fe;
+}
+
 /* ── Global Reset ── */
 *,
 *::before,
@@ -173,6 +220,7 @@ img {
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 5px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -186,6 +234,127 @@ img {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* ── Skeleton animation ── */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface-200) 25%, var(--color-surface-300) 50%, var(--color-surface-200) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 8px;
+}
+
+/* ── Slide drawer animation ── */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.25s ease-out;
+}
+
+/* ── Modal fade ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ── Backdrop ── */
+@keyframes fadeOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-overlay {
+  animation: fadeOverlay 0.2s ease-out;
+}
+
+/* ── Focus ring ── */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+/* ── Card shadows ── */
+.card-shadow {
+  box-shadow: var(--shadow-sm);
+}
+
+.card-shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Print ── */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ── Transitions ── */
+.transition-default {
+  transition: all 0.15s ease;
+}
+
+/* ── Table styles ── */
+.table-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ── Progress bar base ── */
+.progress-bar {
+  height: 6px;
+  background: var(--color-surface-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
 }
 
 /* ── Badge utility ── */
@@ -225,6 +394,13 @@ img {
   color: var(--primary);
 }
 
+/* ── Status dot ── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
 /* ── Toast / Error notification ── */
 .role-error-toast {
   position: fixed;
@@ -255,4 +431,71 @@ img {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ─── Button base ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--color-surface-100);
+  color: var(--color-ink-100);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-surface-200);
+  border-color: var(--color-edge-100);
+}
+
+/* ─── Input styles ─── */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Select styles */
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 36px;
 }
