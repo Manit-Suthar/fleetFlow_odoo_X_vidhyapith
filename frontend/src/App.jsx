@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import DashboardLayout from './components/DashboardLayout';
+import DriverPerformance from './pages/DriverPerformance';
+import AnalyticsReports from './pages/AnalyticsReports';
 import { HiOutlineShieldExclamation } from 'react-icons/hi';
 
 // ── RBAC: Role → allowed pages ──
@@ -134,17 +136,17 @@ function App() {
             </RoleGuard>
           } />
 
-          {/* Page 7: Driver Profiles — Manasvi */}
+          {/* Page 7: Driver Profiles — Manasvi (LIVE) */}
           <Route path="/drivers" element={
             <RoleGuard path="/drivers">
-              <PlaceholderPage title="Driver Performance & Safety" subtitle="Driver Profiles" owner="Manasvi" />
+              <DriverPerformance />
             </RoleGuard>
           } />
 
-          {/* Page 8: Analytics — Manasvi */}
+          {/* Page 8: Analytics — Manasvi (LIVE) */}
           <Route path="/analytics" element={
             <RoleGuard path="/analytics">
-              <PlaceholderPage title="Operational Analytics" subtitle="Financial Reports" owner="Manasvi" />
+              <AnalyticsReports />
             </RoleGuard>
           } />
 
