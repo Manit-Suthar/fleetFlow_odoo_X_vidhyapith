@@ -31,6 +31,10 @@ app.use("/api/analytics", require("./src/routes/analytics"));
 app.use("/api/v1/vehicles", require("./src/routes/vehicles.routes"));
 app.use("/api/v1/trips", require("./src/routes/trips.routes"));
 
+// Routes - Page 5 & 6 (Vatsal)
+app.use("/api/maintenance", require("./src/routes/maintenance"));
+app.use("/api/fuel", require("./src/routes/fuel"));
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
