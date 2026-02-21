@@ -46,12 +46,52 @@ const getAllDrivers = async (req, res) => {
 // GET /api/drivers/:id
 const getDriver = async (req, res) => {
     try {
-        const driver = await driverModel.getById(req.params.id);
+        const id = parseInt(req.params.id);
+        if (isNaN(id)) return res.status(400).json({ error: "Invalid driver ID" });
+
+        const driver = await driverModel.getById(id);
         if (!driver) return res.status(404).json({ error: "Driver not found" });
-        res.json(driver);
+
+        // Fetch performance metrics and issues
+        const [perf, issues] = await Promise.all([
+            driverModel.getPerformance(id),
+            issueModel.getAll({ driver_id: id })
+        ]);
+
+        // Consolidated object with normalization and defensive defaults
+        const consolidated = {
+            ...driver,
+            total_trips: parseInt(perf.totalTrips) || 0,
+            completion_rate: parseInt(perf.completionRate) || 0,
+            ontime_rate: parseInt(perf.ontimeRate) || 0,
+            safety_score: parseInt(perf.safetyScore) || 0,
+            issue_count: parseInt(perf.totalIssues) || 0,
+            late_count: parseInt(perf.lateTrips) || 0,
+
+            monthly_trips: (perf.trends || []).map(t => ({
+                month: t.month || 'N/A',
+                count: parseInt(t.trips) || 0
+            })),
+            monthly_late: (perf.trends || []).map(t => ({
+                month: t.month || 'N/A',
+                count: parseInt(t.late_trips) || 0
+            })),
+            trips: (perf.tripHistory || []).map(t => ({
+                id: t.id,
+                start_date: t.date,
+                origin: t.origin,
+                destination: t.destination,
+                status: t.status,
+                distance_km: t.distance_km,
+                is_late: t.is_late
+            })),
+            issues: issues || []
+        };
+
+        res.json(consolidated);
     } catch (err) {
-        console.error("Error fetching driver:", err);
-        res.status(500).json({ error: "Failed to fetch driver" });
+        console.error("Error in getDriver controller:", err);
+        res.status(500).json({ error: "Failed to fetch consolidated driver data" });
     }
 };
 

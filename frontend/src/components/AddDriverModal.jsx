@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, UserPlus, Loader2 } from 'lucide-react';
 import api from '../utils/api';
+import './Modal.css';
 
 export default function AddDriverModal({ onClose, onSubmit }) {
     const [form, setForm] = useState({ name: '', phone: '', license_number: '', license_expiry: '' });
@@ -34,49 +35,50 @@ export default function AddDriverModal({ onClose, onSubmit }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-overlay" onClick={onClose} />
-            <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl animate-fade-in overflow-hidden">
-                <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
-                    <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center">
-                            <UserPlus size={18} className="text-indigo-600" />
+        <div className="modal">
+            <div className="modal__overlay" onClick={onClose} />
+            <div className="modal__container">
+                <div className="modal__header">
+                    <div className="modal__header-info">
+                        <div className="modal__icon-wrap modal__icon-wrap--accent">
+                            <UserPlus size={20} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-bold text-slate-900">Add Driver</h2>
-                            <p className="text-xs text-slate-500">Register a new driver</p>
+                            <h2 className="modal__title">Add Driver</h2>
+                            <p className="modal__subtitle">Register a new driver to the fleet</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors">
+                    <button onClick={onClose} className="modal__close">
                         <X size={18} />
                     </button>
                 </div>
 
-                <div className="px-6 py-5 space-y-4">
+                <div className="modal__body">
                     {errors.form && (
-                        <div className="px-4 py-3 rounded-lg bg-red-50 text-red-700 text-sm font-medium border border-red-200">
+                        <div className="modal__error" style={{ marginBottom: '20px', padding: '12px', background: 'var(--danger-50)', borderRadius: 'var(--radius-md)', border: '1px solid var(--danger-200)' }}>
                             {errors.form}
                         </div>
                     )}
 
-                    <Field label="Full Name" value={form.name} onChange={v => set('name', v)} error={errors.name} placeholder="Rajesh Kumar" />
-                    <Field label="Phone Number" value={form.phone} onChange={v => set('phone', v)} error={errors.phone} placeholder="9876543210" />
-                    <Field label="License Number" value={form.license_number} onChange={v => set('license_number', v)} error={errors.license_number} placeholder="GJ-05-2021-0012345" />
-                    
-                    <div>
-                        <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                            License Expiry <span className="text-red-500">*</span>
-                        </label>
-                        <input type="date" value={form.license_expiry} onChange={e => set('license_expiry', e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-white border rounded-lg text-sm text-slate-900 focus-ring ${errors.license_expiry ? 'border-red-300 bg-red-50' : 'border-slate-200'}`} />
-                        {errors.license_expiry && <p className="text-xs text-red-600 mt-1.5 font-medium">{errors.license_expiry}</p>}
+                    <div className="modal__grid">
+                        <Field label="Full Name" value={form.name} onChange={v => set('name', v)} error={errors.name} placeholder="Rajesh Kumar" required />
+                        <Field label="Phone Number" value={form.phone} onChange={v => set('phone', v)} error={errors.phone} placeholder="9876543210" required />
+                    </div>
+
+                    <div className="modal__grid" style={{ marginTop: '24px' }}>
+                        <Field label="License Number" value={form.license_number} onChange={v => set('license_number', v)} error={errors.license_number} placeholder="GJ-05-2021-0012345" required />
+                        <div className="modal__field">
+                            <label className="modal__label">License Expiry<span>*</span></label>
+                            <input type="date" value={form.license_expiry} onChange={e => set('license_expiry', e.target.value)}
+                                className={`modal__input ${errors.license_expiry ? 'modal__input--error' : ''}`} />
+                            {errors.license_expiry && <p className="modal__error">{errors.license_expiry}</p>}
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200 bg-slate-50">
-                    <button onClick={onClose} className="px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancel</button>
-                    <button onClick={handleSubmit} disabled={submitting}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 border border-indigo-600 rounded-lg text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+                <div className="modal__footer">
+                    <button onClick={onClose} className="modal__btn modal__btn--ghost">Cancel</button>
+                    <button onClick={handleSubmit} disabled={submitting} className="modal__btn modal__btn--primary">
                         {submitting && <Loader2 size={14} className="animate-spin" />}
                         Add Driver
                     </button>
@@ -86,15 +88,13 @@ export default function AddDriverModal({ onClose, onSubmit }) {
     );
 }
 
-function Field({ label, value, onChange, error, placeholder }) {
+function Field({ label, value, onChange, error, placeholder, required }) {
     return (
-        <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                {label} <span className="text-red-500">*</span>
-            </label>
+        <div className="modal__field">
+            <label className="modal__label">{label}{required && <span>*</span>}</label>
             <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-                className={`w-full px-4 py-2.5 bg-white border rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus-ring ${error ? 'border-red-300 bg-red-50' : 'border-slate-200'}`} />
-            {error && <p className="text-xs text-red-600 mt-1.5 font-medium">{error}</p>}
+                className={`modal__input ${error ? 'modal__input--error' : ''}`} />
+            {error && <p className="modal__error">{error}</p>}
         </div>
     );
 }
