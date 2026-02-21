@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Navigate, NavLink, Route, Routes } from "react-router-dom";
+import VehicleRegistry from "./pages/fleet/VehicleRegistry";
+import TripDispatcher from "./pages/fleet/TripDispatcher";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function FleetLayout() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="dashboard-shell">
+      <aside className="sidebar">
+        <h1>FleetFlow</h1>
+        <nav>
+          <NavLink to="/fleet/vehicles" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+            Vehicle Registry
+          </NavLink>
+          <NavLink to="/fleet/trips" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+            Trip Dispatcher
+          </NavLink>
+        </nav>
+      </aside>
+      <main className="content">
+        <Routes>
+          <Route path="/fleet/vehicles" element={<VehicleRegistry />} />
+          <Route path="/fleet/trips" element={<TripDispatcher />} />
+          <Route path="*" element={<Navigate to="/fleet/vehicles" replace />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <BrowserRouter>
+      <FleetLayout />
+    </BrowserRouter>
+  );
+}
+
+export default App;

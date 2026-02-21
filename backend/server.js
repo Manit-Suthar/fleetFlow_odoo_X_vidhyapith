@@ -14,8 +14,11 @@ app.get("/", (req, res) => {
   res.json({ message: "FleetFlow API is running 🚀" });
 });
 
-// Import routes here
-// app.use("/api/auth", require("./src/routes/auth"));
+app.use("/api/v1/vehicles", require("./src/routes/vehicles.routes"));
+app.use("/api/v1/trips", require("./src/routes/trips.routes"));
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
