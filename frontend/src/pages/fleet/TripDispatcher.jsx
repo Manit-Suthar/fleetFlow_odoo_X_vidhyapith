@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import "./FleetPages.css";
 
 const API_BASE = `${import.meta.env.VITE_API_BASE_URL || "http://localhost:5000"}/api/v1`;
 const REOPEN_MINUTES = 20;
@@ -174,7 +175,7 @@ function TripDispatcher() {
   };
 
   return (
-    <section className="panel">
+    <section className="fleet-page panel">
       <div className="panel-header">
         <div className="panel-heading">
           <h2>Trip Dispatcher & Management</h2>

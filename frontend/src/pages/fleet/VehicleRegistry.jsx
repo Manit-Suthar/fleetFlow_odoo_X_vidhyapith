@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
+import "./FleetPages.css";
 
 const API_BASE = `${import.meta.env.VITE_API_BASE_URL || "http://localhost:5000"}/api/v1`;
 
@@ -198,7 +199,7 @@ function VehicleRegistry() {
   const activeVehicle = useMemo(() => vehicles.find((v) => v.id === menuState.id) || null, [vehicles, menuState.id]);
 
   return (
-    <section className="panel">
+    <section className="fleet-page panel">
       <div className="panel-header">
         <div className="panel-heading">
           <h2>Vehicle Registry</h2>

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     name            VARCHAR(100) NOT NULL,
     email           VARCHAR(150) UNIQUE NOT NULL,
     password_hash   VARCHAR(255) NOT NULL,
-    role            VARCHAR(20) DEFAULT 'viewer',  -- admin, manager, driver, viewer
+    role            VARCHAR(30) DEFAULT 'dispatcher',  -- fleet_manager, dispatcher, safety_officer, financial_analyst
     avatar_url      VARCHAR(500),
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -141,8 +141,8 @@ CREATE TABLE IF NOT EXISTS settings (
 -- =============================================
 
 INSERT INTO users (name, email, password_hash, role) VALUES
-    ('Manit', 'manit@fleetflow.com', '$placeholder$', 'admin'),
-    ('Fenil', 'fenil@fleetflow.com', '$placeholder$', 'manager'),
-    ('Vatsal', 'vatsal@fleetflow.com', '$placeholder$', 'manager'),
-    ('Manasvi', 'manasvi@fleetflow.com', '$placeholder$', 'viewer')
+    ('Manit', 'manit@fleetflow.com', '$placeholder$', 'fleet_manager'),
+    ('Fenil', 'fenil@fleetflow.com', '$placeholder$', 'dispatcher'),
+    ('Vatsal', 'vatsal@fleetflow.com', '$placeholder$', 'safety_officer'),
+    ('Manasvi', 'manasvi@fleetflow.com', '$placeholder$', 'financial_analyst')
 ON CONFLICT (email) DO NOTHING;

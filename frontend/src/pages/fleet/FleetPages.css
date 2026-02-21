@@ -1,0 +1,324 @@
+.fleet-page.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.fleet-page .panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.fleet-page .panel-heading h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.fleet-page .panel-subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.fleet-page .toolbar,
+.fleet-page .dispatcher-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+}
+
+.fleet-page .dispatcher-controls {
+  grid-template-columns: 1.4fr 0.8fr 0.8fr;
+}
+
+.fleet-page .dispatcher-search,
+.fleet-page select,
+.fleet-page input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all 150ms ease;
+}
+
+.fleet-page select:focus,
+.fleet-page input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+.fleet-page .table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  background: var(--bg-card);
+}
+
+.fleet-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fleet-page th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+
+.fleet-page td {
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.fleet-page tr:hover td {
+  background: var(--primary-bg);
+}
+
+.fleet-page .primary-btn,
+.fleet-page .ghost-btn,
+.fleet-page .icon-btn {
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.fleet-page .primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+}
+
+.fleet-page .primary-btn:hover {
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.fleet-page .ghost-btn {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.fleet-page .ghost-btn:hover {
+  background: var(--bg-card-hover);
+}
+
+.fleet-page .ghost-btn.compact {
+  padding: 6px 10px;
+}
+
+.fleet-page .ghost-btn.danger {
+  color: var(--danger);
+}
+
+.fleet-page .ghost-btn:disabled,
+.fleet-page .primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fleet-page .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.fleet-page .badge-success,
+.fleet-page .badge.success {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.fleet-page .badge-warning,
+.fleet-page .badge.warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.fleet-page .badge-danger,
+.fleet-page .badge.danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.fleet-page .badge-info {
+  background: var(--info-bg);
+  color: var(--info);
+}
+
+.fleet-page .badge-primary {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.fleet-page .error {
+  margin: 0 0 0.72rem;
+  color: var(--danger);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.fleet-page .actions-cell {
+  position: relative;
+}
+
+.fleet-page .icon-btn.cool-trigger {
+  border-radius: var(--radius-full);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fbff, #edf2ff);
+  color: #2d57ba;
+  border-color: #c8d8fb;
+}
+
+.fleet-page .menu {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: 170px;
+  box-shadow: var(--shadow-md);
+}
+
+.fleet-page .menu.cool-menu {
+  border: 1px solid #d8e3fb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fleet-page .menu button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0.56rem 0.72rem;
+  color: var(--text-primary);
+}
+
+.fleet-page .menu button:last-child {
+  border-bottom: 0;
+}
+
+.fleet-page .menu button:hover {
+  background: var(--primary-bg);
+}
+
+.fleet-page .floating-menu {
+  position: fixed;
+  min-width: 190px;
+  z-index: 50;
+}
+
+.fleet-page .menu-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.fleet-page .menu-dot.blue {
+  background: var(--info);
+}
+
+.fleet-page .menu-dot.amber {
+  background: var(--warning);
+}
+
+.fleet-page .menu-dot.green {
+  background: var(--success);
+}
+
+.fleet-page .menu-dot.red {
+  background: var(--danger);
+}
+
+.fleet-page .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 60;
+}
+
+.fleet-page .modal {
+  width: min(620px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.fleet-page .modal h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text-heading);
+}
+
+.fleet-page .form-grid {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.fleet-page .form-grid label {
+  display: grid;
+  gap: 0.28rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.fleet-page .modal-actions {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+}
+
+.fleet-page .lifecycle-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .fleet-page .dispatcher-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-page .toolbar {
+    grid-template-columns: 1fr;
+  }
+}
